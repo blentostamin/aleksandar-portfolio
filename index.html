@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aleksandar Đoković — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0d;
+    --bg-alt:#131313;
+    --gold:#e3b04b;
+    --text:#f2f0ec;
+    --text-muted:#9a958c;
+    --line:#242424;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    letter-spacing:-0.01em;
+  }
+
+  em{
+    font-style:italic;
+    color:var(--gold);
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  .container{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:28px 48px;
+    background:linear-gradient(to bottom, rgba(13,13,13,0.9), transparent);
+  }
+
+  .nav-name{
+    font-family:'Fraunces',serif;
+    font-size:1rem;
+    letter-spacing:0.02em;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:0.85rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+
+  .nav-links a{
+    opacity:0.75;
+    transition:opacity 0.25s ease, color 0.25s ease;
+  }
+
+  .nav-links a:hover{
+    opacity:1;
+    color:var(--gold);
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:0 48px;
+    position:relative;
+  }
+
+  .hero-top{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(20px, 4vw, 44px);
+    max-width:1200px;
+    width:100%;
+    margin:0 auto;
+  }
+
+  .hero-portrait{
+    flex:0 0 auto;
+    width:clamp(200px, 24vw, 340px);
+    height:clamp(200px, 24vw, 340px);
+    border-radius:50%;
+    overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 0 0 1px rgba(227,176,75,0.15);
+  }
+
+  .hero-portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .hero-text{
+    flex:1 1 auto;
+    min-width:0;
+  }
+
+  .hero-eyebrow{
+    font-size:0.8rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:24px;
+  }
+
+  .hero h1{
+    font-size:clamp(2rem, 6vw, 5.4rem);
+    line-height:1.05;
+  }
+
+  .hero-tagline{
+    margin-top:24px;
+    font-size:clamp(0.95rem, 1.3vw, 1.15rem);
+    line-height:1.6;
+    color:var(--text-muted);
+    max-width:44ch;
+    font-weight:300;
+  }
+
+  .hero-tagline strong{
+    color:var(--text);
+    font-weight:500;
+  }
+
+  .hero-sub{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px 28px;
+    font-size:0.95rem;
+    color:var(--text-muted);
+  }
+
+  .hero-sub strong{
+    color:var(--text);
+    font-weight:500;
+  }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:48px;
+    left:48px;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .scroll-line{
+    width:1px;
+    height:40px;
+    background:var(--text-muted);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .scroll-line::after{
+    content:'';
+    position:absolute;
+    top:-40px;
+    left:0;
+    width:100%;
+    height:40px;
+    background:var(--gold);
+    animation:scrollmove 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollmove{
+    0%{top:-40px;}
+    100%{top:40px;}
+  }
+
+  /* SECTION GENERIC */
+  section{
+    padding:140px 0;
+    border-top:1px solid var(--line);
+  }
+
+  .eyebrow{
+    font-size:0.8rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    display:block;
+  }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+
+  .about-grid p{
+    font-size:1.15rem;
+    color:var(--text-muted);
+    max-width:56ch;
+  }
+
+  .about-facts{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+  }
+
+  .fact-label{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--text-muted);
+    margin-bottom:4px;
+  }
+
+  .fact-value{
+    font-family:'Fraunces',serif;
+    font-size:1.1rem;
+  }
+
+  /* WORK */
+  .work-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:56px;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+
+  .work-heading h2{
+    font-size:clamp(1.8rem,3.4vw,2.6rem);
+  }
+
+  .work-heading .work-note{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    max-width:32ch;
+  }
+
+  .project-list{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .project-row{
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    align-items:center;
+    gap:32px;
+    padding:36px 0;
+    border-top:1px solid var(--line);
+    transition:padding-left 0.3s ease;
+  }
+
+  .project-row:last-child{
+    border-bottom:1px solid var(--line);
+  }
+
+  .project-row:hover{
+    padding-left:12px;
+  }
+
+  .project-index{
+    font-family:'Fraunces',serif;
+    font-size:0.9rem;
+    color:var(--text-muted);
+  }
+
+  .project-name{
+    font-family:'Fraunces',serif;
+    font-size:1.6rem;
+  }
+
+  .project-desc{
+    font-size:0.9rem;
+    color:var(--text-muted);
+    margin-top:4px;
+  }
+
+  .project-arrow{
+    font-size:1.4rem;
+    color:var(--gold);
+    opacity:0;
+    transform:translateX(-8px);
+    transition:all 0.3s ease;
+  }
+
+  .project-row:hover .project-arrow{
+    opacity:1;
+    transform:translateX(0);
+  }
+
+  .project-gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+    padding:0 32px 48px 32px;
+    max-width:1200px;
+    margin:0 auto;
+    box-sizing:border-box;
+  }
+
+  .project-gallery img{
+    width:100%;
+    height:auto;
+    aspect-ratio:7/8;
+    object-fit:cover;
+    border-radius:18px;
+    background:var(--bg-alt);
+    display:block;
+  }
+
+  .project-gallery.is-portrait img{
+    height:auto;
+    aspect-ratio:4/5;
+    object-fit:cover;
+  }
+
+  .project-gallery.is-square img{
+    aspect-ratio:1/1;
+  }
+
+  .project-gallery-featured{
+    max-width:1200px;
+    margin:0 auto 32px auto;
+    padding:0 32px;
+    box-sizing:border-box;
+  }
+
+  .project-gallery-featured img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:18px;
+  }
+
+  .project-gallery-4{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:32px;
+    padding:0 32px 48px 32px;
+    max-width:1200px;
+    margin:0 auto;
+    box-sizing:border-box;
+  }
+
+  .project-gallery-4 img{
+    width:100%;
+    height:auto;
+    aspect-ratio:7/8;
+    object-fit:cover;
+    border-radius:18px;
+    background:var(--bg-alt);
+    display:block;
+  }
+
+  @media (max-width:768px){
+    .project-gallery-4{
+      grid-template-columns:repeat(2, 1fr);
+      padding:0 24px 48px 24px;
+      gap:18px;
+    }
+    .project-gallery-4 img{
+      height:auto;
+      border-radius:12px;
+    }
+  }
+
+  @media (max-width:768px){
+    .project-gallery{
+      grid-template-columns:1fr;
+      padding:0 24px 48px 24px;
+      gap:18px;
+    }
+    .project-gallery img{
+      height:auto;
+      border-radius:12px;
+    }
+    .project-gallery.is-portrait img{
+      height:auto;
+    }
+    .project-gallery-featured{
+      padding:0 24px;
+    }
+    .project-gallery-featured img{
+      border-radius:12px;
+    }
+  }
+
+  /* CONTACT */
+  .contact{
+    text-align:left;
+  }
+
+  .contact h2{
+    font-size:clamp(2rem,5vw,3.6rem);
+    max-width:14ch;
+    margin-bottom:32px;
+  }
+
+  .contact-email{
+    font-family:'Fraunces',serif;
+    font-size:1.4rem;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:4px;
+    display:inline-block;
+  }
+
+  footer{
+    padding:32px 48px;
+    display:flex;
+    justify-content:space-between;
+    font-size:0.8rem;
+    color:var(--text-muted);
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    .hero-top{
+      flex-direction:column-reverse;
+      align-items:center;
+      text-align:center;
+      gap:20px;
+    }
+    .hero-portrait{
+      width:220px;
+      height:220px;
+    }
+  }
+
+  @media (max-width:768px){
+    nav{padding:20px 24px;}
+    .hero{padding:0 24px;}
+    .container{padding:0 24px;}
+    .about-grid{grid-template-columns:1fr;}
+    .project-row{grid-template-columns:40px 1fr;}
+    .project-arrow{display:none;}
+    section{padding:90px 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Aleksandar Đoković</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Graphic Designer</span>
+      <h1>Clarity is the <em>ultimate visual strategy.</em></h1>
+      <p class="hero-tagline">I'm <strong>Aleksandar Đoković</strong> — I create clean, high-impact brand identities and digital visual systems that eliminate noise and drive results.</p>
+    </div>
+    <div class="hero-portrait">
+      <img src="images/aleksandar-portrait.jpg" alt="Aleksandar Đoković">
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about-grid">
+    <div>
+      <span class="eyebrow">About</span>
+      <p>Years of experience creating visual solutions, spanning the entire process from concept to execution. Graphic design, branding, visual identity, and print preparation, with a current focus on digital platforms.</p>
+    </div>
+    <div class="about-facts">
+      <div>
+        <div class="fact-label">Experience level</div>
+        <div class="fact-value">Senior</div>
+      </div>
+      <div>
+        <div class="fact-label">Focus</div>
+        <div class="fact-value">Brand, Digital &amp; Print</div>
+      </div>
+      <div>
+        <div class="fact-label">Location</div>
+        <div class="fact-value">Beograd</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="work-heading">
+      <h2>Logos &amp; Visual Identities</h2>
+      <div class="work-note">Brand marks &amp; application</div>
+    </div>
+    <div class="project-list">
+      <div class="project-row">
+        <div class="project-index">01</div>
+        <div>
+          <div class="project-name">The Other Guy</div>
+          <div class="project-desc">Business development &amp; early-stage funding</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery is-square">
+        <img src="images/other-guy-logo.jpg" alt="The Other Guy — logotip">
+        <img src="images/other-guy-card.jpg" alt="The Other Guy — vizit karta mockup">
+        <img src="images/other-guy-office.jpg" alt="The Other Guy — kancelarija mockup">
+      </div>
+      <div class="project-row">
+        <div class="project-index">02</div>
+        <div>
+          <div class="project-name">Formoze</div>
+          <div class="project-desc">Flori Cosmetics</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery is-square">
+        <img src="images/formoze-logo.jpg" alt="Formoze Flori — logotip">
+        <img src="images/formoze-cream.jpg" alt="Formoze Flori — krema mockup">
+        <img src="images/formoze-bag.jpg" alt="Formoze Flori — kesa mockup">
+      </div>
+      <div class="project-row">
+        <div class="project-index">03</div>
+        <div>
+          <div class="project-name">Aethra</div>
+          <div class="project-desc">Luxury floating residence brand</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery is-square">
+        <img src="images/aethra-logo.jpg" alt="Aethra — logotip">
+        <img src="images/aethra-catalog.jpg" alt="Aethra — katalog mockup">
+        <img src="images/aethra-building.jpg" alt="Aethra — signage mockup">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:120px;">
+    <div class="work-heading">
+      <h2>Social Media &amp; Brand Communication</h2>
+    </div>
+    <div class="project-list">
+      <div class="project-row">
+        <div class="project-index">01</div>
+        <div>
+          <div class="project-name">Krug zdravlja</div>
+          <div class="project-desc">Instagram posts</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery-featured">
+        <img src="images/kz-phones.jpg" alt="Krug zdravlja — Instagram mockup">
+      </div>
+      <div class="project-gallery is-portrait">
+        <img src="images/kz-danzena.jpg" alt="Krug zdravlja — Dan žena post">
+        <img src="images/kz-jetra.jpg" alt="Krug zdravlja — Jetra post">
+        <img src="images/kz-aids.jpg" alt="Krug zdravlja — AIDS post">
+      </div>
+      <div class="project-row">
+        <div class="project-index">02</div>
+        <div>
+          <div class="project-name">Sports campaign</div>
+          <div class="project-desc">Instagram</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery-featured">
+        <img src="images/sports-mockup.jpg" alt="Sports campaign — mockup">
+      </div>
+      <div class="project-row">
+        <div class="project-index">03</div>
+        <div>
+          <div class="project-name">My Brand — Astronaut</div>
+          <div class="project-desc">Craft beer brand — personal concept</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-gallery">
+        <img src="images/astro-can.jpg" alt="Astronaut IPA — limenka">
+        <img src="images/astro-tote.jpg" alt="Astronaut IPA — ceger">
+        <img src="images/astro-shirt.jpg" alt="Astronaut IPA — majica">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h2>Let's build something that looks inevitable.</h2>
+    <a class="contact-email" href="mailto:aleksandardjokovic86@gmail.com">aleksandardjokovic86@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>© Aleksandar Đoković</span>
+  <span>Beograd, Serbia</span>
+</footer>
+
+</body>
+</html>
